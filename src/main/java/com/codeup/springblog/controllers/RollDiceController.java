@@ -16,7 +16,7 @@ public class RollDiceController {
     @GetMapping("/roll-dice/{n}")
     @ResponseBody
     public String rolledDice(@PathVariable int n, Model viewModel) {
-        int dice = (int) Math.floor(Math.random()+1);
+        int dice = (int) Math.floor(Math.random()*6)+1;
         if (n == dice) {
             return "The number is "+dice+". You guessed "+n+". You guessed correctly~";
         } else {
