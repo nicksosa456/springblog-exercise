@@ -17,7 +17,7 @@ public class MathController {
     @GetMapping("/subtract/{a}/from/{b}")
     @ResponseBody
     public String subtract(@PathVariable int a, @PathVariable int b) {
-        return a + " - " + b + " = " +(a-b);
+        return b + " - " + a + " = " +(b-a);
     }
 
     @GetMapping("/multiply/{a}/and/{b}")
@@ -28,7 +28,7 @@ public class MathController {
 
     @GetMapping("/divide/{a}/by/{b}")
     @ResponseBody
-    public String divide(@PathVariable int a, @PathVariable int b) {
+    public String divide(@PathVariable double a, @PathVariable double b) {
         return a+" / "+b+" = "+(a/b);
     }
 }
