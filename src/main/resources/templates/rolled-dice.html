@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"   />
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <h3>You picked <span th:text="${n}"></span></h3>
+    <h3>The numbers rolled are: <span th:each="num : ${manyDie}" th:text="${num}"></span></h3>
+</div>
+
+<div th:each="num : ${manyDie}" th:if="${n == num}">
+<h5>You matched!</h5>
+</div>
+
+</body>
+</html>

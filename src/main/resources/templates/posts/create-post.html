@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<body>
+<nav th:replace="fragments/navbar :: bulma-navbar"></nav>
+
+<div class="container">
+    <div class="field">
+        <div class="control">
+            <label for="title">Title</label>
+            <input id="title" class="input" type="text" placeholder="Post title" />
+        </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <label for="body">Body</label>
+            <textarea id="body" class="textarea" placeholder="Post Body"></textarea>
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="control">
+            <a class="button">Submit</a>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>
