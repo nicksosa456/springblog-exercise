@@ -4,6 +4,13 @@
 <body>
 <nav th:replace="fragments/navbar :: bulma-navbar"></nav>
 
+<div class="container">
+    <div class="content">
+        <h3 th:text="${id.getTitle()}"></h3>
+        <h6 th:text="${id.getBody()}"></h6>
+    </div>
+</div>
+
 <footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>
