@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: my-header"></head>
+<head>
+    <th:block th:replace="fragments/header :: my-header('Welcome')" />
+</head>
 <body>
-<nav th:replace="fragments/navbar :: bulma-navbar"></nav>
+<th:block th:replace="fragments/navbar :: bulma-navbar" />
 
 <div class="container">
     <div class="content">
@@ -10,8 +12,9 @@
     </div>
 </div>
 
-<footer th:replace="fragments/footer :: footer"></footer>
+<footer>
+    <th:block th:replace="fragments/footer :: footer" />
 
-
+</footer>
 </body>
 </html>

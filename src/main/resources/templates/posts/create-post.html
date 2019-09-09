@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: head"></head>
+<head>
+    <th:block th:replace="fragments/header :: my-header('Create a Post')" />
+
+</head>
 <body>
-<nav th:replace="fragments/navbar :: bulma-navbar"></nav>
+<th:block th:replace="fragments/navbar :: bulma-navbar" />
 
 <div class="container">
+    <form action="">
     <div class="field">
         <div class="control">
             <label for="title">Title</label>
@@ -23,7 +27,10 @@
             <a class="button">Submit</a>
         </div>
     </div>
+    </form>
 </div>
-<footer th:replace="fragments/footer :: footer"></footer>
+<footer>
+    <th:block th:replace="fragments/footer :: footer" />
+</footer>
 </body>
 </html>
