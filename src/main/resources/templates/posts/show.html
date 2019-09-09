@@ -11,6 +11,14 @@
     <div class="content">
         <h3 th:text="${id.getTitle()}"></h3>
         <h6 th:text="${id.getBody()}"></h6>
+        <div class="field is-grouped">
+            <div class="control">
+                <a class="button">Edit</a>
+            </div>
+            <div class="control">
+                <a class="button" name="delete" href="/posts">Delete</a>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -1,35 +1,44 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.Models.Post;
+import com.codeup.springblog.repos.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
 @Controller
 public class PostController {
 
+    private final PostRepository postDao;
+
+    public PostController(PostRepository postDao) {
+        this.postDao = postDao;
+    }
+
     @GetMapping("/posts")
     public String posts(Model viewModel) {
-        ArrayList<Post> posts = new ArrayList<>();
-        Post post = new Post("Test Post", "First test post");
-        Post secondP = new Post("2nd Post", "Showing the every post");
-        Post thirdP = new Post("The 3rd", "Showing them all");
-        posts.add(post);
-        posts.add(secondP);
-        posts.add(thirdP);
-        viewModel.addAttribute("allPosts", posts);
+        viewModel.addAttribute("allPosts", postDao.findAll());
         return "posts/index";
     }
 
+    @PostMapping("/posts")
+    public String joinCohort(@RequestParam(name = "cohort") String cohort, Model model) {
+        model.addAttribute("cohort", "Welcome to " + cohort + "!");
+        return "posts/index";
+    }
+
+//    @PostMapping("/posts")
+//    public String deletePost(@RequestParam(name = "delete") String delete, Model vModel) {
+//        System.out.println(delete);
+//        vModel.addAttribute("delete", "Hello" +delete);
+//        return "posts/index";
+//    }
+
     @GetMapping("/posts/{id}")
-    public String individualPost(@PathVariable int id, Model viewModel) {
-        Post post = new Post("Test Post", "First test post");
-        viewModel.addAttribute("id", post);
+    public String individualPost(@PathVariable long id, Model viewModel) {
+        viewModel.addAttribute("id", postDao.findOne(id));
         return "posts/show";
     }
 

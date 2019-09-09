@@ -8,10 +8,23 @@
 
 <div class="container">
     <div class="content">
+        <h1 th:text="${cohort}"></h1>
+
+        <form action="/posts" method="post">
+            <input type="text" name="cohort" id="cohort-ip" class="field" />
+            <button>Join now</button>
+        </form>
         <h2>Welcome to the blog</h2>
         <th:block th:each="post : ${allPosts}">
-            <h3 th:text="${post.getTitle()}"></h3>
-            <h5 th:text="${post.getBody()}"></h5>
+            <h3 th:text="${post.title}"></h3>
+            <h5 th:text="${post.body}"></h5>
+            <div class="field">
+                <div class="control">
+                    <a class="button" th:href="@{/posts/{postId}(postId = ${post.id})}">View Ad</a>
+                </div>
+            </div>
+
+            <input type="hidden" id="id" th:value="${post.id}" />
         </th:block>
     </div>
 </div>
