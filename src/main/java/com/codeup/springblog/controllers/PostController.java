@@ -8,11 +8,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+
 @Controller
 public class PostController {
 
     @GetMapping("/posts")
-    public String posts() {
+    public String posts(Model viewModel) {
+        ArrayList<Post> posts = new ArrayList<>();
+        Post post = new Post("Test Post", "First test post");
+        Post secondP = new Post("2nd Post", "Showing the every post");
+        Post thirdP = new Post("The 3rd", "Showing them all");
+        posts.add(post);
+        posts.add(secondP);
+        posts.add(thirdP);
+        viewModel.addAttribute("allPosts", posts);
         return "posts/index";
     }
 
