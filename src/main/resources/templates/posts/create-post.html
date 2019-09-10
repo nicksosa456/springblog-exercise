@@ -8,25 +8,25 @@
 <th:block th:replace="fragments/navbar :: bulma-navbar" />
 
 <div class="container">
-    <form action="">
-    <div class="field">
-        <div class="control">
-            <label for="title">Title</label>
-            <input id="title" class="input" type="text" placeholder="Post title" />
+    <form th:action="/posts/create" th:method="post">
+        <div class="field">
+            <div class="control">
+                <label for="title">Title</label>
+                <input id="title" name="title" class="input" type="text" placeholder="Post title" />
+            </div>
         </div>
-    </div>
-    <div class="field">
-        <div class="control">
-            <label for="body">Body</label>
-            <textarea id="body" class="textarea" placeholder="Post Body"></textarea>
+        <div class="field">
+            <div class="control">
+                <label for="body">Body</label>
+                <textarea id="body" name="body" class="textarea" placeholder="Post Body"></textarea>
+            </div>
         </div>
-    </div>
 
-    <div class="field">
-        <div class="control">
-            <a class="button">Submit</a>
+        <div class="field">
+            <div class="control">
+                <a class="button">Submit</a>
+            </div>
         </div>
-    </div>
     </form>
 </div>
 <footer>

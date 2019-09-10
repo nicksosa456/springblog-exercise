@@ -23,23 +23,25 @@ public class PostController {
         return "posts/index";
     }
 
-    @PostMapping("/posts")
-    public String joinCohort(@RequestParam(name = "cohort") String cohort, Model model) {
-        model.addAttribute("cohort", "Welcome to " + cohort + "!");
-        return "posts/index";
-    }
-
-//    @PostMapping("/posts")
-//    public String deletePost(@RequestParam(name = "delete") String delete, Model vModel) {
-//        System.out.println(delete);
-//        vModel.addAttribute("delete", "Hello" +delete);
-//        return "posts/index";
-//    }
-
     @GetMapping("/posts/{id}")
     public String individualPost(@PathVariable long id, Model viewModel) {
         viewModel.addAttribute("id", postDao.findOne(id));
         return "posts/show";
+    }
+
+    @PostMapping("/posts/{id}/delete")
+    public String deletePost(@PathVariable long id, Model vModel) {
+        postDao.delete(id);
+        return "redirect:/posts";
+    }
+
+    @PostMapping("/posts/{id}/edit")
+    public String editPost(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+        Post editPost = postDao.findOne(id);
+        editPost.setTitle(title);
+        editPost.setBody(body);
+        postDao.save(editPost);
+        return "redirect:/posts/{id}";
     }
 
     @GetMapping("/posts/create")
@@ -48,8 +50,11 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String createPost() {
-        return "Create the post, post the data";
+    public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+        Post postToBeCreated = new Post();
+        postToBeCreated.setTitle(title);
+        postToBeCreated.setBody(body);
+        Post createdPost = postDao.save(postToBeCreated);
+        return "redirect:/posts/"+createdPost.getId();
     }
 }

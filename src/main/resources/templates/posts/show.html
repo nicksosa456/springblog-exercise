@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:replace="fragments/header :: my-header('All posts')" />
+    <th:block th:replace="fragments/header :: my-header('Single Post')" />
 
 </head>
 <body>
@@ -9,15 +9,49 @@
 
 <div class="container">
     <div class="content">
-        <h3 th:text="${id.getTitle()}"></h3>
-        <h6 th:text="${id.getBody()}"></h6>
+        <h3 th:text="${id.title}"></h3>
+        <h6 th:text="${id.body}"></h6>
         <div class="field is-grouped">
             <div class="control">
-                <a class="button">Edit</a>
+                <a id="openModal" class="button">Edit</a>
             </div>
             <div class="control">
-                <a class="button" name="delete" href="/posts">Delete</a>
+                <form th:action="@{/posts/{postId}/delete(postId=${id.id})}" th:method="POST">
+                    <button class="button is-danger">Delete</button>
+                </form>
             </div>
+        </div>
+    </div>
+
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Modal title</p>
+                <button class="modal-close delete is-large" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <div class="field">
+                    <label class="label">Title</label>
+                    <div class="control">
+                        <input id="title" class="input" type="text" th:placeholder="${id.title}" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Body</label>
+                    <div class="control">
+                        <textarea id="body" class="textarea" th:placeholder="${id.body}"></textarea>
+                    </div>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+                <form th:action="@{/posts/{postId}/edit(postId=${id.id})}" th:method="post">
+                    <input id="hiddenTitle" type="hidden" name="title" />
+                    <input id="hiddenBody" type="hidden" name="body" />
+                    <button id="save" class="button is-warning">Save changes</button>
+                </form>
+                <button id="cancel" class="button">Cancel</button>
+            </footer>
         </div>
     </div>
 </div>
@@ -25,5 +59,39 @@
 <footer class="footer">
     <th:block th:replace="fragments/footer :: footer" />
 </footer>
+
+<script>
+    document.querySelector('a#openModal').addEventListener('click', function(event) {
+        event.preventDefault();
+        let modal = document.querySelector('.modal');  // assuming you have only 1
+        let html = document.querySelector('html');
+        modal.classList.add('is-active');
+        html.classList.add('is-clipped');
+
+        modal.querySelector('.modal-background').addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.remove('is-active');
+            html.classList.remove('is-clipped');
+        });
+        modal.querySelector('.modal-close').addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.remove('is-active');
+            html.classList.remove('is-clipped');
+        });
+        modal.querySelector('#cancel').addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.remove('is-active');
+            html.classList.remove('is-clipped');
+        });
+    });
+
+    document.querySelector('#save').addEventListener('click', function(e) {
+        // e.preventDefault();
+        let titleVal = document.querySelector('#title').value;
+        let bodyVal = document.querySelector('#body').value;
+        let hiddenTitle = document.querySelector('#hiddenTitle').value = titleVal;
+        let hiddenBody = document.querySelector('#hiddenBody').value = bodyVal;
+    });
+</script>
 </body>
 </html>
