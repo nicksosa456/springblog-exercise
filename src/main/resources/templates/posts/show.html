@@ -9,14 +9,15 @@
 
 <div class="container">
     <div class="content">
-        <h3 th:text="${id.title}"></h3>
-        <h6 th:text="${id.body}"></h6>
+        <h3 th:text="${post.title}"></h3>
+        <h5 th:text="${post.body}"></h5>
+        <h6 th:text="${post.user.email}"></h6>
         <div class="field is-grouped">
             <div class="control">
                 <a id="openModal" class="button">Edit</a>
             </div>
             <div class="control">
-                <form th:action="@{/posts/{postId}/delete(postId=${id.id})}" th:method="POST">
+                <form th:action="@{/posts/{postId}/delete(postId=${post.id})}" th:method="POST">
                     <button class="button is-danger">Delete</button>
                 </form>
             </div>
@@ -34,18 +35,18 @@
                 <div class="field">
                     <label class="label">Title</label>
                     <div class="control">
-                        <input id="title" class="input" type="text" th:placeholder="${id.title}" />
+                        <input id="title" class="input" type="text" th:placeholder="${post.title}" />
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Body</label>
                     <div class="control">
-                        <textarea id="body" class="textarea" th:placeholder="${id.body}"></textarea>
+                        <textarea id="body" class="textarea" th:placeholder="${post.body}"></textarea>
                     </div>
                 </div>
             </section>
             <footer class="modal-card-foot">
-                <form th:action="@{/posts/{postId}/edit(postId=${id.id})}" th:method="post">
+                <form th:action="@{/posts/{postId}/edit(postId=${post.id})}" th:method="post">
                     <input id="hiddenTitle" type="hidden" name="title" />
                     <input id="hiddenBody" type="hidden" name="body" />
                     <button id="save" class="button is-warning">Save changes</button>
