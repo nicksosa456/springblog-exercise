@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <div class="modal">
+    <div class="modal" th:object="${post}">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
@@ -35,13 +35,13 @@
                 <div class="field">
                     <label class="label">Title</label>
                     <div class="control">
-                        <input id="title" class="input" type="text" th:placeholder="${post.title}" />
+                        <input id="title" class="input" th:field="*{title}" />
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Body</label>
                     <div class="control">
-                        <textarea id="body" class="textarea" th:placeholder="${post.body}"></textarea>
+                        <textarea id="body" class="textarea" th:field="*{body}" ></textarea>
                     </div>
                 </div>
             </section>
