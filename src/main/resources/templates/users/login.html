@@ -7,17 +7,17 @@
 <th:block th:replace="fragments/navbar :: bulma-navbar" />
 
 <div class="container">
-    <form th:action="@{/users/login}">
+    <form th:action="@{/users/login}" th:method="post" th:object="${user}">
         <div class="field">
             <div class="control">
                 <label for="username">Username</label>
-                <input class="input" type="text" id="username" name="username" placeholder="username" />
+                <input class="input" id="username" th:field="*{username}" placeholder="username" />
             </div>
         </div>
         <div class="field">
             <div class="control">
                 <label for="password">Password</label>
-                <input class="input" type="password" id="password" name="password" placeholder="password" />
+                <input class="input" type="password" id="password" th:field="*{password}" placeholder="password" />
             </div>
         </div>
         <div class="field">
