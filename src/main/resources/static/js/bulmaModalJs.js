@@ -24,11 +24,11 @@
         });
     });
 
-    document.querySelector('#save').addEventListener('click', function(e) {
-        // e.preventDefault();
-        let titleVal = document.querySelector('#title').value;
-        let bodyVal = document.querySelector('#body').value;
-        let hiddenTitle = document.querySelector('#hiddenTitle').value = titleVal;
-        let hiddenBody = document.querySelector('#hiddenBody').value = bodyVal;
-    });
+    // document.querySelector('#save').addEventListener('click', function(e) {
+    //     // e.preventDefault();
+    //     let titleVal = document.querySelector('#title').value;
+    //     let bodyVal = document.querySelector('#body').value;
+    //     let hiddenTitle = document.querySelector('#hiddenTitle').value = titleVal;
+    //     let hiddenBody = document.querySelector('#hiddenBody').value = bodyVal;
+    // });
 })();

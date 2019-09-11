@@ -47,8 +47,9 @@
             </section>
             <footer class="modal-card-foot">
                 <form th:action="@{/posts/{postId}/edit(postId=${post.id})}" th:method="post">
-                    <input id="hiddenTitle" type="hidden" name="title" />
-                    <input id="hiddenBody" type="hidden" name="body" />
+                    <input id="hiddenTitle" type="hidden" th:field="*{title}" />
+                    <input id="hiddenBody" type="hidden" th:field="*{body}" />
+                    <input type="hidden" th:field="*{user.id}" />
                     <button id="save" class="button is-warning">Save changes</button>
                 </form>
                 <button id="cancel" class="button">Cancel</button>
