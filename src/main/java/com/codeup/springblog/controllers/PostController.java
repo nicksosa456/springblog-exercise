@@ -47,17 +47,14 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    public String viewCreatePost() {
+    public String viewCreatePost(Model model) {
+        model.addAttribute("post", new Post());
         return "posts/createPost";
     }
 
     @PostMapping("/posts/create")
-    public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+    public String createPost(@ModelAttribute Post postToBeCreated) {
         User loggedUser = userDao.findOne(1L);
-
-        Post postToBeCreated = new Post();
-        postToBeCreated.setTitle(title);
-        postToBeCreated.setBody(body);
         postToBeCreated.setUser(loggedUser);
 
         Post createdPost = postDao.save(postToBeCreated);
