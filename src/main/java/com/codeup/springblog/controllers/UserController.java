@@ -35,4 +35,18 @@ public class UserController {
         userDao.save(registerUser);
         return "redirect:/posts";
     }
+
+    @GetMapping("/login")
+    public String viewLogin() {
+        return "users/login";
+    }
+
+    @PostMapping("/login")
+    public String logUserIn(
+            @RequestParam(name = "username") String username,
+            @RequestParam(name = "password") String password
+    ) {
+        User loggedInUser = new User();
+        return "redirect:/posts";
+    }
 }
