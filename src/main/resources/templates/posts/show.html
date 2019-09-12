@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <th:block th:replace="fragments/header :: my-header('Single Post')" />
 
@@ -12,7 +13,7 @@
         <h3 th:text="${post.title}"></h3>
         <h5 th:text="${post.body}"></h5>
         <h6 th:text="${post.user.email}"></h6>
-        <div class="field is-grouped">
+        <div sec:authorize="isAuthenticated()" th:if="${#authentication.principal.id} == ${post.user.id}" class="field is-grouped">
             <div class="control">
                 <a id="openModal" class="button">Edit</a>
             </div>

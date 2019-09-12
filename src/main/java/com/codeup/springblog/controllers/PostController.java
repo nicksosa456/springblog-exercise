@@ -4,9 +4,16 @@ import com.codeup.springblog.Models.Post;
 import com.codeup.springblog.Models.User;
 import com.codeup.springblog.repos.PostRepository;
 import com.codeup.springblog.repos.UserRepository;
+import com.codeup.springblog.services.EmailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
+import java.io.IOException;
+import java.util.Locale;
 
 @Controller
 public class PostController {
@@ -18,6 +25,9 @@ public class PostController {
         this.userDao = userDao;
         this.postDao = postDao;
     }
+
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/posts")
     public String posts(Model viewModel) {
@@ -55,11 +65,17 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public String createPost(@ModelAttribute Post postToBeCreated) {
-        User loggedUser = userDao.findOne(1L);
+    public String createPost(@ModelAttribute Post postToBeCreated, final Locale locale) throws MessagingException, IOException {
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loggedUser = userDao.findOne(userSession.getId());
         postToBeCreated.setUser(loggedUser);
 
         Post createdPost = postDao.save(postToBeCreated);
+
+//        this.emailService.sendMailWithInline(postToBeCreated.getUser().getUsername(), postToBeCreated.getUser().getEmail(), locale);
+        emailService.prepareAndSend(postToBeCreated, "Test Email", "This is a test.");
+
+
         return "redirect:/posts/"+createdPost.getId();
     }
 }

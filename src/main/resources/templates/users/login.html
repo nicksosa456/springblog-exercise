@@ -7,17 +7,28 @@
 <th:block th:replace="fragments/navbar :: bulma-navbar" />
 
 <div class="container">
-    <form th:action="@{/users/login}" th:method="post" th:object="${user}">
+    <div th:if="${param.error}" class="content">
+        <h5 style="color:red">Invalid Username and Password.</h5>
+    </div>
+
+    <div th:if="${param.logout}" class="content">
+        <h5 style="color:red">You have been logged out.</h5>
+    </div>
+
+    <div class="content">
+        <h4>Please log in</h4>
+    </div>
+    <form th:action="@{/login}" method="post">
         <div class="field">
             <div class="control">
                 <label for="username">Username</label>
-                <input class="input" id="username" th:field="*{username}" placeholder="username" />
+                <input class="input" name="username" id="username" placeholder="username" />
             </div>
         </div>
         <div class="field">
             <div class="control">
                 <label for="password">Password</label>
-                <input class="input" type="password" id="password" th:field="*{password}" placeholder="password" />
+                <input class="input" name="password" type="password" id="password" placeholder="password" />
             </div>
         </div>
         <div class="field">
