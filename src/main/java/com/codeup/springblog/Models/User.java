@@ -1,6 +1,9 @@
 package com.codeup.springblog.Models;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -9,12 +12,16 @@ public class User {
     @Id @GeneratedValue
     private long id;
 
+    @NotBlank(message = "Please enter a username")
     @Column(nullable = false, unique = true)
     private String username;
 
+    @NotBlank(message = "Please enter an email")
     @Column(nullable = false, unique = true)
     private String email;
 
+    @NotBlank(message = "Please enter a password")
+    @Size(min = 6, max = 20, message = "Passwords must be between 6 and 20 characters")
     @Column(nullable = false)
     private String password;
 

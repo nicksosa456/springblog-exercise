@@ -8,11 +8,17 @@
 
 <div class="container">
     <div th:if="${param.error}" class="content">
-        <h5 style="color:red">Invalid Username and Password.</h5>
+        <div class="notification is-warning">
+            <a class="delete"></a>
+            <strong>Invalid Username and Password.</strong>
+        </div>
     </div>
 
     <div th:if="${param.logout}" class="content">
-        <h5 style="color:red">You have been logged out.</h5>
+        <div class="notification is-warning">
+            <a class="delete"></a>
+            <strong>You have been logged out.</strong>
+        </div>
     </div>
 
     <div class="content">
@@ -46,5 +52,6 @@
 <footer>
     <th:block th:replace="fragments/footer :: footer" />
 </footer>
+<script type="text/javascript" th:src="@{/js/deleteNotification.js}"></script>
 </body>
 </html>

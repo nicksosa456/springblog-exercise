@@ -5,10 +5,11 @@ import com.codeup.springblog.repos.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 @Controller
 public class UserController {
@@ -28,10 +29,24 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute User registerUser) {
-        String hash = passwordEncoder.encode(registerUser.getPassword());
-        registerUser.setPassword(hash);
-        userDao.save(registerUser);
-        return "redirect:/login";
+    public String registerUser(@Valid User registerUser, Errors validation, Model model) {
+        if(userDao.countAllByEmailOrUsername(registerUser.getEmail(), registerUser.getUsername()) > 0) {
+            validation.rejectValue(
+                    "username",
+                    "user.username",
+                    "Invalid Username and/or email."
+            );
+        }
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("user", registerUser);
+            return "users/register";
+        } else {
+            String hash = passwordEncoder.encode(registerUser.getPassword());
+            registerUser.setPassword(hash);
+            userDao.save(registerUser);
+            return "redirect:/login";
+
+        }
     }
 }
