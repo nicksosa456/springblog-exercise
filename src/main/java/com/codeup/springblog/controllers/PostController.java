@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -65,17 +67,24 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public String createPost(@ModelAttribute Post postToBeCreated, final Locale locale) throws MessagingException, IOException {
+    public String createPost(@Valid Post post,
+//                             final Locale locale,
+                             Errors validation,
+                             Model model)
+//            throws MessagingException, IOException
+    {
         User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User loggedUser = userDao.findOne(userSession.getId());
-        postToBeCreated.setUser(loggedUser);
-
-        Post createdPost = postDao.save(postToBeCreated);
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("post", post);
+            return "posts/createPost";
+        }
+        post.setUser(loggedUser);
+        Post createdPost = postDao.save(post);
 
 //        this.emailService.sendMailWithInline(postToBeCreated.getUser().getUsername(), postToBeCreated.getUser().getEmail(), locale);
-        emailService.prepareAndSend(postToBeCreated, "Test Email", "This is a test.");
-
-
+//        emailService.prepareAndSend(post, "Test Email", "This is a test.");
         return "redirect:/posts/"+createdPost.getId();
     }
 }

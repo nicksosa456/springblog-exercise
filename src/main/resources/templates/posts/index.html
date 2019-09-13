@@ -23,7 +23,11 @@
                         </div>
                     </div>
                     <footer class="card-footer">
-                        <a class="card-footer-item" th:href="@{/posts/{postId}(postId = ${post.id})}">View Post</a>
+                        <a class="card-footer-item" th:href="@{/posts/{postId}(postId = ${post.id})}">View Post
+                            <span class="icon">
+                                <i class="fas fa-fish"></i>
+                            </span>
+                        </a>
                         <input type="hidden" id="id" th:value="${post.id}" />
                     </footer>
                 </div>

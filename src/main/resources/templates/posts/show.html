@@ -15,11 +15,19 @@
         <h6 th:text="${post.user.email}"></h6>
         <div sec:authorize="isAuthenticated()" th:if="${#authentication.principal.id} == ${post.user.id}" class="field is-grouped">
             <div class="control">
-                <a id="openModal" class="button">Edit</a>
+                <a id="openModal" class="button">Edit
+                    <span class="icon">
+                        <i class="fas fa-edit"></i>
+                    </span>
+                </a>
             </div>
             <div class="control">
                 <form th:action="@{/posts/{postId}/delete(postId=${post.id})}" th:method="POST">
-                    <button class="button is-danger">Delete</button>
+                    <button class="button is-danger">Delete
+                        <span class="icon">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                    </button>
                 </form>
             </div>
         </div>
@@ -51,9 +59,17 @@
                     <input id="hiddenTitle" type="hidden" th:field="*{title}" />
                     <input id="hiddenBody" type="hidden" th:field="*{body}" />
                     <input type="hidden" th:field="*{user.id}" />
-                    <button id="save" class="button is-warning">Save changes</button>
+                    <button id="save" class="button is-warning">Save changes
+                        <span class="icon">
+                            <i class="fas fa-save"></i>
+                        </span>
+                    </button>
                 </form>
-                <button id="cancel" class="button">Cancel</button>
+                <button id="cancel" class="button">Cancel
+                    <span class="icon">
+                        <i class="fas fa-backspace"></i>
+                    </span>
+                </button>
             </footer>
         </div>
     </div>

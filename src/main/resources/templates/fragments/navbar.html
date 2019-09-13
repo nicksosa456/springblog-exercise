@@ -19,26 +19,38 @@
         <div class="navbar-start">
             <a href="/posts" class="navbar-item">Home</a>
             <a href="/posts/create" class="navbar-item">Create A Post</a>
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">More</a>
+<!--            <div class="navbar-item has-dropdown is-hoverable">-->
+<!--                <a class="navbar-link">More</a>-->
 
-                <div class="navbar-dropdown">
-                    <a class="navbar-item">About</a>
-                    <a class="navbar-item">Jobs</a>
-                    <a class="navbar-item">Contact</a>
-                    <hr class="navbar-divider" />
-                    <a class="navbar-item">Report an issue</a>
-                </div>
-            </div>
+<!--                <div class="navbar-dropdown">-->
+<!--                    <a class="navbar-item">About</a>-->
+<!--                    <a class="navbar-item">Jobs</a>-->
+<!--                    <a class="navbar-item">Contact</a>-->
+<!--                    <hr class="navbar-divider" />-->
+<!--                    <a class="navbar-item">Report an issue</a>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
 
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a th:href="@{/register}" class="button is-primary"><strong>Sign up</strong></a>
-                    <a th:href="@{/login}" class="button is-light">Log in</a>
+                    <a sec:authorize="!isAuthenticated()" th:href="@{/register}" class="button is-primary"><strong>Sign up</strong>
+                        <span class="icon">
+                            <i class="fas fa-frog"></i>
+                        </span>
+                    </a>
+                    <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="button is-light">Log in
+                        <span class="icon">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </span>
+                    </a>
                     <form th:action="@{/logout}" th:method="post">
-                        <button sec:authorize="isAuthenticated()" class="button is-warning">Logout</button>
+                        <button sec:authorize="isAuthenticated()" class="button is-warning">Logout
+                            <span class="icon">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </span>
+                        </button>
                     </form>
                 </div>
             </div>
