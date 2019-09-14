@@ -21,7 +21,6 @@ public class User {
     private String email;
 
     @NotBlank(message = "Please enter a password")
-    @Size(min = 6, max = 20, message = "Passwords must be between 6 and 20 characters")
     @Column(nullable = false)
     private String password;
 
