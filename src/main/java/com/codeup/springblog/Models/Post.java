@@ -1,5 +1,6 @@
 package com.codeup.springblog.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -21,7 +22,11 @@ public class Post {
     @Column(nullable = false)
     private String body;
 
-    @OneToOne
+//    @OneToOne
+//    private User user;
+
+    @ManyToOne
+    @JsonManagedReference
     private User user;
 
     public Post() {}

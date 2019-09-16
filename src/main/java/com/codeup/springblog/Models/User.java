@@ -1,10 +1,13 @@
 package com.codeup.springblog.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -24,7 +27,12 @@ public class User {
 
     @NotBlank(message = "Please enter a password")
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    private List<Post> posts;
 
     public User() {
     }
