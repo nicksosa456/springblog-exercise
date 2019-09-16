@@ -1,5 +1,6 @@
 package com.codeup.springblog.Models;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class User {
     private String username;
 
     @NotBlank(message = "Please enter an email")
+    @Email(message = "Email should be valid")
     @Column(nullable = false, unique = true)
     private String email;
 
