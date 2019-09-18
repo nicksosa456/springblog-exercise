@@ -50,12 +50,8 @@ public class PostController {
     }
 
     @PostMapping("/posts/{id}/edit")
-    public String editPost(@PathVariable long id, @ModelAttribute Post editPost
-//                           @RequestParam(name = "title") String title, @RequestParam(name = "body") String body
-    ) {
+    public String editPost(@PathVariable long id, @ModelAttribute Post editPost) {
         Post postToEdit = postDao.findOne(id);
-//        editPost.setTitle(title);
-//        editPost.setBody(body);
         postDao.save(editPost);
         return "redirect:/posts/{id}";
     }

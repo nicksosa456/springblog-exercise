@@ -8,9 +8,8 @@ svg {
     overflow: visible;
 }
 .search {
-    margin-left: -16rem;
     margin-top: -3.5rem;
-    width: 34rem;
+    width: 20rem;
     height: 7rem;
 }
 .search:not(.active) {
@@ -29,7 +28,7 @@ svg {
     stroke-width: 6px;
 }
 .search-input {
-    margin-left: 13.5rem;
+    margin-left: -1.5rem;
     margin-top: 1.7rem;
     position: relative;
     width: 17rem;
