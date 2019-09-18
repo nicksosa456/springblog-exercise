@@ -10,32 +10,32 @@
     <div class="content">
         <h2>Welcome to <span th:text="${user.username}"></span>'s profile.</h2>
     </div>
-    <div th:if="${showEditControls}" class="field">
-        <div class="control">
-            <a id="openModal" class="button">Edit Profile
-                <span class="icon">
-                    <i class="fas fa-edit"></i>
-                </span>
-            </a>
-            <div class="field is-grouped">
-                <input type="hidden" th:field="*{username}" />
-                <input type="hidden" th:field="*{email}" />
-                <input type="hidden" th:field="*{id}" />
-            </div>
-            <div class="content">
-                <div th:if="${#fields.hasErrors('username')}" class="notification is-warning">
-                    <a class="delete"></a>
-                    <strong th:errors="*{username}"></strong>
-                </div>
-            </div>
-            <div class="content">
-                <div th:if="${#fields.hasErrors('email')}" class="notification is-warning">
-                    <a class="delete"></a>
-                    <strong th:errors="*{email}"></strong>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--    <div th:if="${showEditControls}" class="field">-->
+<!--        <div class="control">-->
+<!--            <a id="openModal" class="button">Edit Profile-->
+<!--                <span class="icon">-->
+<!--                    <i class="fas fa-edit"></i>-->
+<!--                </span>-->
+<!--            </a>-->
+<!--            <div class="field is-grouped">-->
+<!--                <input type="hidden" th:field="*{username}" />-->
+<!--                <input type="hidden" th:field="*{email}" />-->
+<!--                <input type="hidden" th:field="*{id}" />-->
+<!--            </div>-->
+<!--            <div class="content">-->
+<!--                <div th:if="${#fields.hasErrors('username')}" class="notification is-warning">-->
+<!--                    <a class="delete"></a>-->
+<!--                    <strong th:errors="*{username}"></strong>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="content">-->
+<!--                <div th:if="${#fields.hasErrors('email')}" class="notification is-warning">-->
+<!--                    <a class="delete"></a>-->
+<!--                    <strong th:errors="*{email}"></strong>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
 
     <div class="modal" th:object="${user}">

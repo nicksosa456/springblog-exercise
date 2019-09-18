@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragments/header :: my-header('Home')" />
+</head>
+<body>
+<th:block th:replace="fragments/navbar :: bulma-navbar" />
+
+<div class="container">
+    <div class="content">
+        <h2>Welcome to Merblogs!</h2>
+        <figure class="image is-128x128">
+            <img th:src="@{/img/blueTail.jpg}" alt="blueTail" />
+        </figure>
+    </div>
+</div>
+
+<footer>
+    <th:block th:replace="fragments/footer :: footer" />
+</footer>
+</body>
+</html>
